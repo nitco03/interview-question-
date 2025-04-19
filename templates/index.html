@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Question Generator</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Interview Question Generator</h1>
+        
+        <form action="/generate-questions/" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="resume">Upload Your Resume (PDF):</label>
+                <input type="file" id="resume" name="file" accept=".pdf" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="job_role">Job Role:</label>
+                <input type="text" id="job_role" name="job_role" required placeholder="e.g., Software Engineer">
+            </div>
+            
+            <button type="submit">Generate Questions</button>
+        </form>
+        
+        {% if questions %}
+            <div class="results">
+                <h2>Generated Interview Questions:</h2>
+                <ol>
+                    {% for question in questions %}
+                        <li>{{ question }}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        {% endif %}
+
+        {% if suggestions %}
+            <div class="results">
+                <h2>Resume Improvement Suggestions:</h2>
+                <ul>
+                    {% for suggestion in suggestions %}
+                        <li>{{ suggestion }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
